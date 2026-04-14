@@ -15,7 +15,7 @@ public class AnomalyController {
         this.anomalyRepository = anomalyRepository;
     }
 
-    @GetMapping
+    @GetMapping("/anomalies")
     public List<Anomalies> getAll() {
         return anomalyRepository.findAll();
     }
