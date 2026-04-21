@@ -1,8 +1,6 @@
 package ax.ha.it.cd.ruwich;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +18,10 @@ public class AnomalyController {
         return anomalyRepository.findAll();
     }
 
+    @PostMapping
+    public Anomaly addAnomaly(@RequestBody Anomaly anomaly) {
+        return anomalyRepository.save(anomaly);
+    }
 
 
     @GetMapping("/with-observations")
