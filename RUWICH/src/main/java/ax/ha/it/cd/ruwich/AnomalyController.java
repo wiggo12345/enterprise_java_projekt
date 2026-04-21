@@ -19,4 +19,13 @@ public class AnomalyController {
     public List<Anomaly> getAll() {
         return anomalyRepository.findAll();
     }
+
+
+
+    @GetMapping("/with-observations")
+    public List<Anomaly> getAllWithObservations() {
+        return anomalyRepository.findAllWithObservations();
+    }
+
+
 }
