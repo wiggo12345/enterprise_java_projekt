@@ -31,7 +31,4 @@ public class Anomaly {
 
     private String classification;
 
-    private Date date;
-
-    private String location;
 }
