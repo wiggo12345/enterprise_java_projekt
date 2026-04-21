@@ -2,11 +2,13 @@ package ax.ha.it.cd.ruwich;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name= "anomalies")
-public class Anomalies {
+@Table(name= "observations")
+public class Observation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    //A comment
+
 
     private String name;
 

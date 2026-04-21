@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/anomalies")
-public class AnomalyController {
-    private final AnomalyRepository anomalyRepository;
+@RequestMapping("/api/observations")
+public class ObservationController {
+    private final ObservationController observationController;
 
-    public AnomalyController(AnomalyRepository anomalyRepository) {
-        this.anomalyRepository = anomalyRepository;
+    public ObservationController(ObservationController observationController) {
+        this.observationController = observationController;
     }
 
     @GetMapping()
     public List<Anomaly> getAll() {
-        return anomalyRepository.findAll();
+        return observationController.findAll();
     }
 }

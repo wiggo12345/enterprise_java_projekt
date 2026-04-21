@@ -2,6 +2,6 @@ package ax.ha.it.cd.ruwich;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AnomalyRepository extends JpaRepository<Anomaly, Integer> {
+public interface ObservationRepository extends JpaRepository<Observation, Integer> {
 
 }
