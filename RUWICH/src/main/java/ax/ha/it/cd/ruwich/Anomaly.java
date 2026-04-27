@@ -20,15 +20,11 @@ public class Anomaly {
 
 
 
-
-
-
-
-
     private String name;
 
     private String description;
 
-    private String classification;
+    @Enumerated(EnumType.STRING)
+    private Classification classification;
 
 }
