@@ -13,8 +13,8 @@ import java.util.List;
 public class Anomaly {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Betyder att databasen ansvrar för att skapa ett unikt id automatiskt
+    private Integer id;                         //GenerationType.IDENTITY betyder att databasen hanterar autoinkrement
     @OneToMany(mappedBy = "anomaly", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Observation> observations;
 
