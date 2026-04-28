@@ -1,4 +1,5 @@
 package ax.ha.it.cd.ruwich;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class Anomaly {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Betyder att databasen ansvrar för att skapa ett unikt id automatiskt
     private Integer id;                         //GenerationType.IDENTITY betyder att databasen hanterar autoinkrement
     @OneToMany(mappedBy = "anomaly", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Observation> observations;
 
 

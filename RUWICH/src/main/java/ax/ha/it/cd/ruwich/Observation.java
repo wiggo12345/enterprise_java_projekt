@@ -1,5 +1,6 @@
 
 package ax.ha.it.cd.ruwich;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
@@ -25,7 +26,8 @@ public class Observation {
 
 
     @ManyToOne
-    @JoinColumn(name = "anomalyId")
+    @JoinColumn(name = "anomaly_id")
+    @JsonBackReference
     private Anomaly anomaly;
     //A comment
 

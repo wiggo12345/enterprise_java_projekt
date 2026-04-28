@@ -1,5 +1,6 @@
 package ax.ha.it.cd.ruwich;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +25,23 @@ public class AnomalyController {
     }
 
 
-    @GetMapping("/with-observations")
-    public List<Anomaly> getAllWithObservations() {
-        return anomalyRepository.findAllWithObservations();
+    @GetMapping("/{id}")
+    public Anomaly findByID(@PathVariable int id) {
+        return anomalyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found"));
     }
+
+
+
+
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public void deleteAnomaly(@PathVariable int id) {
+        anomalyRepository.deleteById(id);
+    }
+
+
 
 
 }
