@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -30,4 +31,13 @@ public class ObservationController {
     public Observation addObservation(@RequestBody Observation observation) {
         return observationRepository.save(observation);
     }
+
+
+
+    @Transactional
+    @DeleteMapping("/deleteObservation/{id}")
+    public void deleteObservation(@PathVariable int id) {
+        observationRepository.deleteById(id);
+    }
+
 }
