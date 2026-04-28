@@ -9,15 +9,24 @@ import java.util.List;
 @RequestMapping("/api/anomalies")
 public class AnomalyController {
     private final AnomalyRepository anomalyRepository;
+    private final ObservationRepository observationRepository;
 
-    public AnomalyController(AnomalyRepository anomalyRepository) {
+    public AnomalyController(AnomalyRepository anomalyRepository, ObservationRepository observationRepository) {
         this.anomalyRepository = anomalyRepository;
+        this.observationRepository = observationRepository;
     }
 
     @GetMapping()
     public List<Anomaly> getAll() {
         return anomalyRepository.findAll();
     }
+
+
+    @GetMapping("/classification/{classification}")
+    public List<Anomaly> getAllByClassification(@PathVariable Classification classification) {
+        return anomalyRepository.findByClassification(classification);
+    }
+
 
     @PostMapping
     public Anomaly addAnomaly(@RequestBody Anomaly anomaly) {
@@ -31,6 +40,13 @@ public class AnomalyController {
                 .orElseThrow(() -> new RuntimeException("Not found"));
     }
 
+/*
+    @GetMapping("/updateDescription/{id}")
+    public Anomaly updateDescription(@PathVariable String description) {
+        anomaly().setDescription(description);
+
+    }
+*/
 
 
 

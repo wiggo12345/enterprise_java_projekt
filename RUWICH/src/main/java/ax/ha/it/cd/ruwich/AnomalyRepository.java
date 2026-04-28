@@ -11,5 +11,6 @@ public interface AnomalyRepository extends JpaRepository<Anomaly, Integer> {
 
     @EntityGraph(attributePaths = "observations")
     Optional<Anomaly> findById(Integer id);
+
+    List<Anomaly> findByClassification(Classification classification);
 }
- 
