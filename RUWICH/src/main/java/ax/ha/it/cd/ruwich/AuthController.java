@@ -33,4 +33,14 @@ public class AuthController {
         UserDetails user = (UserDetails) auth.getPrincipal();
         return jwtUtil.generateToken(user);
     }
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/signup")
+    public String signup(@RequestBody AuthRequest request) {
+        userService.register(request);
+        return "User created";
+    }
+
 }
