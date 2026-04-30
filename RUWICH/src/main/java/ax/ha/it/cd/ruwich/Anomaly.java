@@ -1,6 +1,7 @@
 package ax.ha.it.cd.ruwich;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,9 @@ public class Anomaly {
 
     private String name;
 
+
+    @Size(max = 400)
+    @Column(length = 400)
     private String description;
 
     @Enumerated(EnumType.STRING)

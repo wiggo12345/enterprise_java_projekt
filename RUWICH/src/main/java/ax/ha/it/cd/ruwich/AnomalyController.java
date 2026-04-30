@@ -1,5 +1,6 @@
 package ax.ha.it.cd.ruwich;
 
+import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class AnomalyController {
 
 
     @PostMapping
-    public Anomaly addAnomaly(@RequestBody Anomaly anomaly) {
+    public Anomaly addAnomaly(@Valid @RequestBody Anomaly anomaly) {
         return anomalyRepository.save(anomaly);
     }
 
@@ -55,7 +56,6 @@ public class AnomalyController {
 
 
     }
-
 
 
 
