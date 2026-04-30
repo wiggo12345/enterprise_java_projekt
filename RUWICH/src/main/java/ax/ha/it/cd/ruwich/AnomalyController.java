@@ -7,6 +7,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/anomalies")
+
+
+@Transactional
 public class AnomalyController {
     private final AnomalyRepository anomalyRepository;
     private final ObservationRepository observationRepository;
@@ -40,13 +43,20 @@ public class AnomalyController {
                 .orElseThrow(() -> new RuntimeException("Not found"));
     }
 
-/*
-    @GetMapping("/updateDescription/{id}")
-    public Anomaly updateDescription(@PathVariable String description) {
-        anomaly().setDescription(description);
+
+    @PutMapping("/updateDescription/{id}/description")
+    public Anomaly updateDescription(@PathVariable Integer id, @RequestBody String description) {
+
+
+        Anomaly anomaly = anomalyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Anomaly not found"));
+        anomaly.setDescription(description);
+        return anomalyRepository.save(anomaly);
+
 
     }
-*/
+
+
 
 
 

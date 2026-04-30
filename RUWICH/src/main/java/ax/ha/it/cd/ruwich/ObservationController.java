@@ -34,6 +34,22 @@ public class ObservationController {
 
 
 
+
+    @PutMapping("/updateDescription/{id}/description")
+    public Observation updateDescription(@PathVariable Integer id, @RequestBody String description) {
+
+
+        Observation observation = observationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Observation not found"));
+        observation.setDescription(description);
+        return observationRepository.save(observation);
+
+
+    }
+
+
+
+
     @Transactional
     @DeleteMapping("/deleteObservation/{id}")
     public void deleteObservation(@PathVariable int id) {
