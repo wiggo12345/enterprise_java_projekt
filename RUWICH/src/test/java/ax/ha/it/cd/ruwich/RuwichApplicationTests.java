@@ -12,17 +12,17 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 class AnomalyIntegrationTest {
 
-    private int id;
+    private static int id;
 
     @LocalServerPort
     private int port;
@@ -114,6 +114,9 @@ void testCreateAnomaly() throws Exception {
         //Plocka ut id
         String idString = responseBody.split("\"id\":")[1].split(",")[0];
         id = Integer.parseInt(idString);
+
+        assertTrue(id > 0);
+
         System.out.println("Found ID: " + id);
 
 
@@ -122,7 +125,65 @@ void testCreateAnomaly() throws Exception {
         assertTrue(responseBody.contains("Integration Test"));
     }
 
-    
+
+    @Order(3)
+    @Test
+    void testDeleteAnomalyById() throws Exception {
+        System.out.println("ID to delete: " + id);
+
+
+        URL deleteUrl = new URL(
+                "http://localhost:" + port +
+                        "/api/anomalies/" + id
+        );
+
+        HttpURLConnection deleteConnection =
+                (HttpURLConnection) deleteUrl.openConnection();
+
+        deleteConnection.setRequestMethod("DELETE");
+
+        int deleteResponseCode = deleteConnection.getResponseCode();
+
+        System.out.println("DELETE response code: " + deleteResponseCode);
+
+        //Assert
+        assertEquals(200, deleteResponseCode);
+
+        //verify deletion
+
+        URL getUrl = new URL(
+                "http://localhost:" + port +
+                        "/api/anomalies/classification/Test"
+        );
+
+        HttpURLConnection getConnection =
+                (HttpURLConnection) getUrl.openConnection();
+
+        getConnection.setRequestMethod("GET");
+
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(getConnection.getInputStream())
+        );
+
+        StringBuilder response = new StringBuilder();
+
+        String line;
+
+        while((line = reader.readLine()) != null) {
+            response.append(line);
+        }
+
+        reader.close();
+
+        String responseBody = response.toString();
+
+        System.out.println(responseBody);
+
+        assertFalse(responseBody.contains("Integration Test"));
+
+}
+
+
     }
 
 
