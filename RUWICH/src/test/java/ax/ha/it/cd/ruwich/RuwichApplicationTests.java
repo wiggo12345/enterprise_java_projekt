@@ -1,5 +1,6 @@
 package ax.ha.it.cd.ruwich;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,26 +23,22 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 class AnomalyIntegrationTest {
 
+static {
+    Dotenv dotenv = Dotenv.configure()
+            .directory("../")
+            .load();
+
+    java.lang.System.setProperty("DB_URL", dotenv.get("DB_URL"));
+    java.lang.System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
+    java.lang.System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+}
+
+
     private static int id;
 
     @LocalServerPort
     private int port;
-/*
-    @Test
-    void shouldReachEndpoint() throws Exception {
-        URL url = new URL("http://localhost:" + port + "/api/anomalies");
 
-        HttpURLConnection connection =
-                (HttpURLConnection) url.openConnection();
-
-        connection.setRequestMethod("GET");
-
-        int responseCode = connection.getResponseCode();
-
-        System.out.println("Response code: " + responseCode);
-
-        assertEquals(200, responseCode);
-    }*/
 @Order(1)
 @Test
 void testCreateAnomaly() throws Exception {
