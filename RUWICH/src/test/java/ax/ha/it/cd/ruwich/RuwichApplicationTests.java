@@ -5,12 +5,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -20,8 +18,7 @@ class AnomalyIntegrationTest {
     private int port;
 
     @Test
-    void shouldGetAllAnomalies() throws Exception {
-
+    void shouldReachEndpoint() throws Exception {
         URL url = new URL("http://localhost:" + port + "/api/anomalies");
 
         HttpURLConnection connection =
@@ -31,6 +28,9 @@ class AnomalyIntegrationTest {
 
         int responseCode = connection.getResponseCode();
 
+        System.out.println("Response code: " + responseCode);
+
         assertEquals(200, responseCode);
     }
 }
+
