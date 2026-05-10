@@ -98,3 +98,4 @@ _What we have implemented so far based on the given mission statement._
 ## Testing Requirements
 
 - The application can be tested interactively with Swagger UI.
+- The application has integration tests with @SpringBootTest
